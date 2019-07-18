@@ -38,7 +38,7 @@
 
 * Compared to TensorFlow XLA
 
-  	![65338DBF-7773-497D-A79F-344A199B0BEA](/var/folders/5c/bd03__1j6js07gfzk1rl_s0w0000gn/T/net.shinyfrog.bear/BearTemp.Be9phf/65338DBF-7773-497D-A79F-344A199B0BEA.png)
+  	![image-20190718124643847](assets/image-20190718124643847.png)
 
 ## An example with Nvidia GPU
  [Tutorial of TVM](https://docs.tvm.ai/tutorials/relay_quick_start.html#sphx-glr-tutorials-relay-quick-start-py) 
