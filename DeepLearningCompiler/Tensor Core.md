@@ -27,9 +27,9 @@
 
 * Each Tensor Core provides a <u>4x4x4 matrix processing array</u> which performs the operation **D** = **A \* B + C**, where **A,** **B**, **C** and **D** are 4×4 matrices as Figure 1 shows. The matrix multiply inputs **A** and **B** are FP16 matrices, while the accumulation matrices **C** and **D** may be FP16 or FP32 matrices. **(so called mixed-precision/Mixed Precision Models)**
 
-  ![image-20190705145918241](/Users/hhp/Library/Application Support/typora-user-images/image-20190705145918241.png)
+  ![image-20190718123337928](assets/image-20190718123337928.png)
 
-  ![image-20190705150306298](/Users/hhp/Library/Application Support/typora-user-images/image-20190705150306298.png)
+  ![image-20190718123348865](assets/image-20190718123348865.png)
 
 * Each Tensor Core performs 64 ($4^3$) <u>floating point FMA</u> (fused multiply-add) mixed-precision operations per clock $\Rightarrow$ 8 Tensor Cores in an SM perform a total of 1024 ($64 \times 2 \times 8$) <u>floating point operations</u> per clock
 *  Multiple Tensor Cores are used concurrently by <u>a full warp of execution</u>, CUDA exposes <u>these larger 16x16x16 matrix operations</u> (provided by the threads within a warp) as warp-level matrix operations in the CUDA C++ WMMA API
@@ -89,4 +89,13 @@ In practice, for mixed precision training, our recommendations are:
 * Once enabling mixed precision, you can achieve further speedups by:
   * **Enabling the** **TensorFlow XLA compiler**.Please note that Google still lists XLA as an experimental tool
   * **Increasing the minibatch size.** Larger mini-batches often lead to better GPU utilization, mixed-precision enables up to 2x larger minibatches.
+
+
+
+
+
+## [Deep Learning Performance Guide](https://docs.nvidia.com/deeplearning/sdk/dl-performance-guide/index.html)
+
+* This guide describes and explains <u>the impact of parameter choice</u> on the performance of various types of neural network layers
+* Performance Metric: operation speed, FLOPS
 

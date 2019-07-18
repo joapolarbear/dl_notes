@@ -52,7 +52,7 @@
   * Middle end: transforms and optimizes this representation
   * Back end: translates it back to LLVM-IR
 
-  ![image-20190704141944877](/Users/hhp/Library/Application Support/typora-user-images/image-20190704141944877.png)
+  ![image-20190718123739343](assets/image-20190718123739343.png)
 
 ### LLVM-IR to Polyhedral Model
 

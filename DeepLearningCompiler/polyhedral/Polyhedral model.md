@@ -18,23 +18,42 @@ The polyhedral model is a <u>compilation technique</u> which
 
 * In contrast to Abstract Syntax Tree 
 * One solution for tackling the phase-ordering problem
-	![image-20190708141316908](/Users/hhp/Library/Application Support/typora-user-images/image-20190708141316908.png)
+	![image-20190718123751309](assets/image-20190718123751309.png)
 * Good for performing a set of loop transformations 
 	* Loop permutation (interchange) : stride access or offset access
 	* Loop fusion/distribution: 
-	![image-20190708141234746](/Users/hhp/Library/Application Support/typora-user-images/image-20190708141234746.png)
+	![image-20190718123759742](assets/image-20190718123759742.png)
 	* Loop tiling
 
 
 ## Schedules
-![image-20190708141523539](/Users/hhp/Library/Application Support/typora-user-images/image-20190708141523539.png)
+![image-20190718123814412](assets/image-20190718123814412.png)
 
+* $d = 2 m_s + 1, m_s = $ the size of iteration vector
 * $s$ denotes a statement, $\vec{i} $ denotes the iteration vector
 * Function $T$: return the logical state of each statement
 
-### An Example: Loop permutation
+#### An Example: Loop permutation
 
-![image-20190704133939758](/Users/hhp/Library/Application Support/typora-user-images/image-20190704133939758.png)
+* Original schedule: $T_{S_1}(i, j) = (i, j)$
+
+```c++
+for (i = 0; i < 2; i++) {
+	for (j = 0; j < 3; j++){
+    b[i][j] = ...; // S1
+  }
+}
+```
+
+* New schedule: $T_{S_1}(i, j) = \begin{pmatrix} 0 & 1 \\ 1 & 0  \end{pmatrix}  \begin{pmatrix} i \\ j \end{pmatrix} =   \begin{pmatrix} j \\ i  \end{pmatrix} $ , where $\begin{pmatrix} 0 & 1 \\ 1 & 0  \end{pmatrix}$ is the <u>transformation</u>
+
+```c++
+for (j = 0; j < 3; j++) {
+	for (i = 0; i < 2; i++){
+    b[i][j] = ...; // S1
+  }
+}
+```
 
 
 
@@ -51,13 +70,23 @@ The polyhedral model is a <u>compilation technique</u> which
 
 ## Iteration Domain
 
-![image-20190704133716445](/Users/hhp/Library/Application Support/typora-user-images/image-20190704133716445.png)
+![image-20190718123827421](assets/image-20190718123827421.png)
 
-* <u>If those constraints are affine -> Polyhedron (limitation)</u>
+* A set of constraints to represent instances of a statement
+  * Using iteration vectors (i, j);
+  * <u>If those constraints are affine -> Polyhedron (limitation)</u>
 
 ## Legality
 
-![image-20190704134317724](/Users/hhp/Library/Application Support/typora-user-images/image-20190704134317724.png)
+* Dependence polyhedron example
 
-![image-20190704134332306](/Users/hhp/Library/Application Support/typora-user-images/image-20190704134332306.png)
+  ![image-20190718123838212](assets/image-20190718123838212.png)
 
+* Dependence polyhedron: $P_e$, a set of inequalities ($i_{S_1} = i_{S_2} \Rightarrow i_{S_1} - i_{S_2} \geq 0 \and i_{S_2} - i_{S_1} \geq 0$)
+
+  * A general and accurate representation of instance-wise dependences.
+
+* Legality:
+
+  * $\forall \langle s, t \rangle \in P_e, (s \in D^{S_i}, t \in D^{S_j}), T_{S_i}(s) \prec T_{S_j}(t)$
+  * If "source" instance must happen before "target" instance in the original program, the transformed program must preserve this property (must satisfy the dependence)
