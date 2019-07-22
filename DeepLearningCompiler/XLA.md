@@ -31,12 +31,6 @@
 4. Target-specific code generation
 ![image-20190718123446394](assets/image-20190718123446394.png)
 
-
-
-
-
-
-
 * The CPU and GPU backends included with XLA use LLVM for low-level IR, optimization, and code-generation
 * For XLA, some benchmarks may experience slowdowns
 * Most users will not see large benefits from XLA  [official Web](https://www.tensorflow.org/xla/overview) 
