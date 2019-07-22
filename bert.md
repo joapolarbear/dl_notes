@@ -133,9 +133,11 @@ Three abstract vectors:
 
 ## Decoder
 
-![decoder1](https://jalammar.github.io/images/t/transformer_decoding_1.gif)
+![image-20190722190442141](assets/image-20190722190442141.png)
 
-![decoder2](https://jalammar.github.io/images/t/transformer_decoding_2.gif)
+* $K, V$ from encoders are fed into <u>each encoder in encoders</u>.
+* Output shift right as next "input" of decoders: I am -> I am a -> I am a student
+  * Sequence-to-sequence model
 
 ## Why Self-Attention
 
