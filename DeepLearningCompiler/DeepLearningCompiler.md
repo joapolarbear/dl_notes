@@ -70,3 +70,7 @@ AutoTVM aims to show an automated end-to-end solution for optimizing and deployi
 ### TVM language
 
  TVM language allows us to programmatically define a rich search space of implementation options analogous to what a human engineer can explore manually. 
+ 
+ ## Compare TVM to Glow
+ TVM: more fine-grained, optimize each operators, and use ML to give the optimal configuration for each backend.
+ Glow: coarse grained, use some optimized low-level operators to compose high-level operators.
